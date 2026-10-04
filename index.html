@@ -1,181 +1,971 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joyland - Ejemplo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Joyland Organization - Educación, acompañamiento y oportunidades para niños y niñas en Tanzania.">
+  <title>Joyland Organization | Tanzania</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <style>
+    :root {
+      --green: #234d3c;
+      --green-dark: #17382c;
+      --green-light: #e8f0eb;
+      --sand: #f4efe5;
+      --orange: #d9783d;
+      --orange-dark: #b85d2a;
+      --cream: #fffdf8;
+      --text: #26332d;
+      --muted: #6e7772;
+      --white: #ffffff;
+      --border: #e2e6e1;
+      --shadow: 0 18px 50px rgba(26, 48, 39, .10);
+      --radius: 18px;
+      --max: 1180px;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f7fa;
-            color: #333;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        header {
-            background-color: #1e88e5;
-            color: white;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    html { scroll-behavior: smooth; }
 
-        header h1 {
-            font-size: 28px;
-        }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.65;
+    }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-        }
+    a { color: inherit; text-decoration: none; }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+    img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
 
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(
-                rgba(30, 136, 229, 0.8),
-                rgba(30, 136, 229, 0.8)
-            );
-            color: white;
-        }
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: auto;
+    }
 
-        .hero h2 {
-            font-size: 45px;
-            margin-bottom: 20px;
-        }
+    /* TOP BAR */
+    .topbar {
+      background: var(--green-dark);
+      color: rgba(255,255,255,.88);
+      font-size: 13px;
+      padding: 8px 0;
+    }
 
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
+    .topbar-inner {
+      display: flex;
+      justify-content: flex-end;
+      gap: 22px;
+    }
 
-        .boton {
-            display: inline-block;
-            background-color: white;
-            color: #1e88e5;
-            padding: 14px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,253,248,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(226,230,225,.8);
+    }
 
-        .boton:hover {
-            background-color: #eeeeee;
-        }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
 
-        .contenido {
-            max-width: 1100px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      color: var(--green);
+      letter-spacing: -.04em;
+      font-size: 24px;
+    }
 
-        .contenido h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--orange);
+      color: white;
+      font-size: 20px;
+    }
 
-        .tarjetas {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 14px;
+      font-weight: 650;
+    }
 
-        .tarjeta {
-            background-color: white;
-            width: 300px;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+    .nav-links a:hover { color: var(--orange-dark); }
 
-        .tarjeta h3 {
-            color: #1e88e5;
-            margin-bottom: 15px;
-        }
+    .nav-cta {
+      background: var(--orange);
+      color: white !important;
+      padding: 11px 17px;
+      border-radius: 999px;
+    }
 
-        footer {
-            margin-top: 60px;
-            padding: 25px;
-            text-align: center;
-            background-color: #222;
-            color: white;
-        }
-    </style>
+    .menu {
+      display: none;
+      border: 0;
+      background: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--green);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 680px;
+      display: grid;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(20,45,34,.94) 0%, rgba(20,45,34,.78) 48%, rgba(20,45,34,.15) 100%),
+        url("https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=2000&q=85")
+        center/cover;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 700px;
+      padding: 80px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 12px;
+      font-weight: 800;
+      color: #f4b27e;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1 {
+      font-size: clamp(45px, 7vw, 82px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      margin-bottom: 26px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      font-size: 20px;
+      color: rgba(255,255,255,.88);
+      margin-bottom: 34px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: .2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: white;
+    }
+
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+
+    .btn-light {
+      color: white;
+      border-color: rgba(255,255,255,.45);
+      background: rgba(255,255,255,.08);
+    }
+
+    .btn-light:hover { background: rgba(255,255,255,.15); }
+
+    /* INTRO */
+    .intro {
+      padding: 95px 0 70px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .section-label {
+      color: var(--orange-dark);
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-weight: 900;
+      font-size: 12px;
+      margin-bottom: 13px;
+    }
+
+    h2 {
+      color: var(--green);
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+      margin-bottom: 20px;
+    }
+
+    .lead {
+      font-size: 20px;
+      color: #4c5952;
+    }
+
+    .intro-image {
+      min-height: 430px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background:
+        url("https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=85")
+        center/cover;
+    }
+
+    /* STATS */
+    .stats {
+      padding: 30px 0 90px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .stat {
+      background: white;
+      padding: 28px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--green);
+      font-size: 35px;
+      letter-spacing: -.04em;
+    }
+
+    .stat span { color: var(--muted); font-size: 14px; }
+
+    /* PROJECTS */
+    .projects {
+      background: var(--sand);
+      padding: 100px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .section-head p { max-width: 470px; color: var(--muted); }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-image {
+      height: 190px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .education { background-image: url("https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80"); }
+    .home { background-image: url("https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=900&q=80"); }
+    .health { background-image: url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80"); }
+    .food { background-image: url("https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1?auto=format&fit=crop&w=900&q=80"); }
+
+    .card-body { padding: 25px; }
+
+    .card-body h3 {
+      color: var(--green);
+      font-size: 22px;
+      margin-bottom: 9px;
+    }
+
+    .card-body p { color: var(--muted); font-size: 14px; }
+
+    /* VOLUNTEER */
+    .volunteer {
+      padding: 100px 0;
+    }
+
+    .volunteer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .volunteer-image {
+      min-height: 560px;
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(35,77,60,.08), rgba(35,77,60,.08)),
+        url("https://images.unsplash.com/photo-1472162072942-cd5147eb3902?auto=format&fit=crop&w=1200&q=85")
+        center/cover;
+    }
+
+    .volunteer-list {
+      list-style: none;
+      margin: 28px 0;
+      display: grid;
+      gap: 15px;
+    }
+
+    .volunteer-list li {
+      display: flex;
+      gap: 14px;
+      padding: 17px;
+      background: var(--green-light);
+      border-radius: 12px;
+    }
+
+    .check {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    /* LOCATION */
+    .location {
+      background: var(--green);
+      color: white;
+      padding: 100px 0;
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .location h2 { color: white; }
+
+    .location p { color: rgba(255,255,255,.76); }
+
+    .place-box {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .place-box div {
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.06);
+      border-radius: 12px;
+    }
+
+    .place-box strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+
+    .map-card {
+      min-height: 420px;
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(20,45,34,.15), rgba(20,45,34,.25)),
+        url("https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=1200&q=85")
+        center/cover;
+    }
+
+    /* ACCOMMODATION */
+    .stay {
+      padding: 100px 0;
+    }
+
+    .stay-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .stay-image {
+      min-height: 440px;
+      border-radius: 24px;
+      background:
+        url("https://images.unsplash.com/photo-1560185008-b033106af5c3?auto=format&fit=crop&w=1200&q=85")
+        center/cover;
+    }
+
+    .price {
+      margin-top: 25px;
+      padding: 24px;
+      background: var(--sand);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .price strong { color: var(--green); font-size: 31px; }
+
+    /* DONATION */
+    .donation {
+      padding: 100px 0;
+      background: #f8f3e8;
+    }
+
+    .donation-box {
+      background: var(--green);
+      color: white;
+      border-radius: 26px;
+      padding: 55px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .donation h2 { color: white; }
+
+    .donation p { color: rgba(255,255,255,.76); }
+
+    .donation-data {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .donation-data div {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .donation-data div:last-child { border-bottom: 0; }
+
+    .donation-data span {
+      color: rgba(255,255,255,.6);
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #13251e;
+      color: rgba(255,255,255,.7);
+      padding: 55px 0 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 45px;
+    }
+
+    footer h3 { color: white; margin-bottom: 15px; }
+    footer a:hover { color: white; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 950px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: var(--cream);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links.open { display: flex; }
+      .menu { display: block; }
+
+      .intro-grid,
+      .volunteer-grid,
+      .location-grid,
+      .stay-grid,
+      .donation-box {
+        grid-template-columns: 1fr;
+      }
+
+      .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .intro-image { min-height: 360px; }
+      .volunteer-image { min-height: 420px; }
+      .map-card { min-height: 330px; }
+
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .container { width: min(100% - 28px, var(--max)); }
+
+      .topbar { display: none; }
+      .nav { min-height: 68px; }
+      .nav-links { top: 68px; }
+
+      .hero { min-height: 620px; }
+      .hero-content { padding: 55px 0; }
+      .hero p { font-size: 17px; }
+
+      .intro, .projects, .volunteer, .location, .stay, .donation {
+        padding: 70px 0;
+      }
+
+      .section-head { display: block; }
+      .section-head p { margin-top: 15px; }
+
+      .project-grid,
+      .stats-grid,
+      .place-box,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .donation-box { padding: 30px 22px; }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Joyland</h1>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>Tanzania · Mto wa Mbu</span>
+      <span>Educación · Comunidad · Oportunidades</span>
+    </div>
+  </div>
 
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="#">Quiénes somos</a>
-            <a href="#">Proyectos</a>
-            <a href="#">Contacto</a>
-        </nav>
-    </header>
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="brand">
+        <span class="brand-mark">♥</span>
+        JOYLAND
+      </a>
 
-    <section class="hero">
-        <h2>Construyendo un futuro mejor</h2>
+      <button class="menu" aria-label="Abrir menú" onclick="toggleMenu()">☰</button>
 
-        <p>
-            Acompañamos a niños y niñas para que puedan crecer,
-            aprender y tener nuevas oportunidades.
-        </p>
+      <nav class="nav-links" id="navLinks">
+        <a href="#quienes">Quiénes somos</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#voluntariado">Voluntariado</a>
+        <a href="#tanzania">Tanzania</a>
+        <a href="#donar" class="nav-cta">Quiero colaborar</a>
+      </nav>
+    </div>
+  </header>
 
-        <a href="#" class="boton">Conoce nuestro proyecto</a>
+  <main>
+
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Joyland Organization · Tanzania</div>
+          <h1>Un futuro con más oportunidades.</h1>
+          <p>
+            Trabajamos para acompañar a niños y niñas, impulsar su educación
+            y construir un entorno donde puedan crecer, aprender y sentirse queridos.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#donar">Quiero ayudar</a>
+            <a class="btn btn-light" href="#voluntariado">Ser voluntario/a</a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="contenido">
-        <h2>¿Qué hacemos?</h2>
+    <section class="intro" id="quienes">
+      <div class="container intro-grid">
+        <div>
+          <div class="section-label">Quiénes somos</div>
+          <h2>Una iniciativa nacida de la educación y el compromiso.</h2>
+          <p class="lead">
+            Gasper John Ngalawa y Ruth crearon Joyland con la voluntad de ayudar
+            a niños y niñas de su comunidad. Después de sus propios estudios y
+            experiencias como docentes, decidieron poner sus conocimientos al
+            servicio de quienes más lo necesitan.
+          </p>
+          <br>
+          <p>
+            Joyland combina el acompañamiento de los niños del orfanato con
+            una apuesta por la educación infantil y primaria bilingüe,
+            en swahili e inglés.
+          </p>
+        </div>
+        <div class="intro-image" role="img" aria-label="Infancia y comunidad en África"></div>
+      </div>
+    </section>
 
-        <div class="tarjetas">
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat">
+            <strong>28</strong>
+            <span>niños y niñas indicados en el proyecto de orfanato</span>
+          </div>
+          <div class="stat">
+            <strong>75+</strong>
+            <span>niños y niñas en la escuela descrita en el programa</span>
+          </div>
+          <div class="stat">
+            <strong>3–7</strong>
+            <span>años de edad del alumnado de preescolar</span>
+          </div>
+          <div class="stat">
+            <strong>2</strong>
+            <span>idiomas de enseñanza: swahili e inglés</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="tarjeta">
-                <h3>Educación</h3>
-                <p>
-                    Facilitamos el acceso a una educación de calidad
-                    y acompañamos a los niños durante su crecimiento.
-                </p>
+    <section class="projects" id="proyectos">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-label">Lo que hacemos</div>
+            <h2>Proyectos que ponen a las personas en el centro.</h2>
+          </div>
+          <p>
+            La educación, el cuidado, la alimentación y el acceso a recursos
+            básicos forman parte de nuestro trabajo diario y de nuestros
+            proyectos de futuro.
+          </p>
+        </div>
+
+        <div class="project-grid">
+
+          <article class="card">
+            <div class="card-image education"></div>
+            <div class="card-body">
+              <h3>Educación</h3>
+              <p>
+                Apostamos por una educación digna y completa, con especial
+                atención al aprendizaje del inglés desde edades tempranas.
+              </p>
             </div>
+          </article>
 
-            <div class="tarjeta">
-                <h3>Alimentación</h3>
-                <p>
-                    Trabajamos para garantizar una alimentación
-                    adecuada y saludable.
-                </p>
+          <article class="card">
+            <div class="card-image home"></div>
+            <div class="card-body">
+              <h3>Nuevo hogar y escuela</h3>
+              <p>
+                Trabajamos para construir un nuevo orfanato y una escuela
+                que puedan dar cabida a más niños y niñas de la comunidad.
+              </p>
             </div>
+          </article>
 
-            <div class="tarjeta">
-                <h3>Familia</h3>
-                <p>
-                    Creamos un entorno seguro donde cada niño pueda
-                    sentirse querido, acompañado y protegido.
-                </p>
+          <article class="card">
+            <div class="card-image health"></div>
+            <div class="card-body">
+              <h3>Salud</h3>
+              <p>
+                Los profesionales sanitarios pueden colaborar en el centro
+                de salud del distrito de Monduli.
+              </p>
             </div>
+          </article>
+
+          <article class="card">
+            <div class="card-image food"></div>
+            <div class="card-body">
+              <h3>Agua y alimentación</h3>
+              <p>
+                Proporcionamos agua potable y alimentación durante la jornada
+                escolar para apoyar a familias en situación de vulnerabilidad.
+              </p>
+            </div>
+          </article>
 
         </div>
+      </div>
     </section>
 
-    <footer>
-        <p>© 2026 Joyland - Todos los derechos reservados</p>
-    </footer>
+    <section class="volunteer" id="voluntariado">
+      <div class="container volunteer-grid">
+        <div class="volunteer-image"></div>
+
+        <div>
+          <div class="section-label">Voluntariado</div>
+          <h2>Tu tiempo, tus conocimientos y tus ganas también ayudan.</h2>
+          <p>
+            Joyland ofrece diferentes posibilidades de voluntariado durante
+            todo el año. Además de colaborar, la experiencia permite conocer
+            la cultura local y desarrollar nuevas habilidades.
+          </p>
+
+          <ul class="volunteer-list">
+            <li>
+              <span class="check">✓</span>
+              <div>
+                <strong>Escuela</strong><br>
+                Apoyo educativo, inglés, educación física, danza y música.
+              </div>
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              <div>
+                <strong>Orfanato</strong><br>
+                Apoyo en tareas del hogar, deberes y actividades con los niños.
+              </div>
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              <div>
+                <strong>Salud</strong><br>
+                Colaboración de profesionales sanitarios en el centro de salud.
+              </div>
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              <div>
+                <strong>Profesionales</strong><br>
+                Electricidad, fontanería, albañilería y otras especialidades.
+              </div>
+            </li>
+          </ul>
+
+          <a class="btn btn-primary" href="#contacto">Quiero ser voluntario/a</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="location" id="tanzania">
+      <div class="container location-grid">
+        <div>
+          <div class="section-label">Dónde estamos</div>
+          <h2>Mto wa Mbu, Tanzania.</h2>
+          <p>
+            El proyecto se encuentra en Mto wa Mbu, una localidad del distrito
+            de Monduli. Desde aquí es posible conocer la vida local y disfrutar
+            de la naturaleza y los parques de la zona.
+          </p>
+
+          <div class="place-box">
+            <div>
+              <strong>Manyara</strong>
+              <span>Parque y lago</span>
+            </div>
+            <div>
+              <strong>Ngorongoro</strong>
+              <span>Área natural cercana</span>
+            </div>
+            <div>
+              <strong>Masai</strong>
+              <span>Comunidades locales</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-card" role="img" aria-label="Paisaje de Tanzania"></div>
+      </div>
+    </section>
+
+    <section class="stay">
+      <div class="container stay-grid">
+        <div>
+          <div class="section-label">Alojamiento</div>
+          <h2>Un lugar para descansar después de colaborar.</h2>
+          <p>
+            Joyland ofrece alojamiento en Mto wa Mbu, en una casa situada
+            aproximadamente a cuatro minutos andando del orfanato.
+            Hay habitaciones individuales o compartidas, baño, ducha,
+            cocina y sala común.
+          </p>
+
+          <div class="price">
+            <div>
+              <span>Alojamiento + 3 comidas</span>
+              <strong>140 € / semana</strong>
+            </div>
+          </div>
+
+          <p style="margin-top:16px; color:var(--muted); font-size:14px;">
+            El PDF del proyecto indica también un coste de 80 € para el trayecto
+            del aeropuerto al alojamiento.
+          </p>
+        </div>
+
+        <div class="stay-image"></div>
+      </div>
+    </section>
+
+    <section class="donation" id="donar">
+      <div class="container">
+        <div class="donation-box">
+          <div>
+            <div class="section-label">Haz una donación</div>
+            <h2>Tu aportación puede ayudar a construir un futuro mejor.</h2>
+            <p>
+              Las donaciones contribuyen a sostener la educación, la alimentación,
+              el hogar y los proyectos de mejora de las instalaciones de Joyland.
+            </p>
+            <br>
+            <a class="btn btn-primary" href="#contacto">Quiero colaborar</a>
+          </div>
+
+          <div class="donation-data">
+            <div>
+              <span>Titular</span>
+              JOYLAND ORGANIZATION
+            </div>
+            <div>
+              <span>Banco</span>
+              CRDB · Cooperative and Rural Development Bank
+            </div>
+            <div>
+              <span>Número de cuenta</span>
+              015C567930800
+            </div>
+            <div>
+              <span>SWIFT</span>
+              CORUTZTZ
+            </div>
+            <div>
+              <span>Ubicación</span>
+              Mto wa Mbu · Arusha · Tanzania
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="contacto">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#inicio" class="brand" style="color:white; margin-bottom:15px; display:inline-flex;">
+            <span class="brand-mark">♥</span>
+            JOYLAND
+          </a>
+          <p>
+            Educación, acompañamiento y oportunidades para niños y niñas
+            en Tanzania.
+          </p>
+        </div>
+
+        <div>
+          <h3>Explora</h3>
+          <p><a href="#quienes">Quiénes somos</a></p>
+          <p><a href="#proyectos">Proyectos</a></p>
+          <p><a href="#voluntariado">Voluntariado</a></p>
+          <p><a href="#tanzania">Tanzania</a></p>
+        </div>
+
+        <div>
+          <h3>Contacto</h3>
+          <p>Mto wa Mbu, Arusha, Tanzania</p>
+          <p style="margin-top:7px;">+255 745 337 500</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Joyland Organization</span>
+        <span>Hecho con solidaridad · Karibu</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("open");
+    }
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        document.getElementById("navLinks").classList.remove("open");
+      });
+    });
+  </script>
 
 </body>
 </html>
